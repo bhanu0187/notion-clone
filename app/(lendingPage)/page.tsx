@@ -1,5 +1,6 @@
 import Heading from "@/app/(lendingPage)/_components/heading";
 import Heroes from "./_components/heroes";
+import Footer from "./_components/footer";
 
 const LendingPage = () => {
 	return (
@@ -8,6 +9,7 @@ const LendingPage = () => {
 				<Heading />
 				<Heroes />
 			</div>
+			<Footer />
 		</div>
 	);
 };
