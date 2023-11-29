@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { Toaster } from "sonner";
 
 import { ThemeProvider } from "@/components/providers/themeProvider";
 import { ConvexClientProvider } from "@/components/providers/convex-provider";
@@ -47,6 +48,7 @@ export default function RootLayout({
 						disableTransitionOnChange
 						storageKey='notion-theme'
 					>
+						<Toaster position='top-right' />
 						{children}
 					</ThemeProvider>
 				</ConvexClientProvider>
