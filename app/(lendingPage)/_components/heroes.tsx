@@ -16,6 +16,7 @@ const Heroes = () => {
 						fill
 						className=' object-contain hidden dark:block'
 						alt='Documents'
+						sizes=''
 					/>
 				</div>
 				<div className='relative w-[400px] h-[400px] hidden md:block'>
@@ -30,6 +31,7 @@ const Heroes = () => {
 						alt='Reading'
 						className=' object-contain hidden dark:block'
 						fill
+						sizes=''
 					/>
 				</div>
 			</div>

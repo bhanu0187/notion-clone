@@ -4,8 +4,10 @@ import { ChevronsLeft, MenuIcon } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { ElementRef, useEffect, useRef, useState } from "react";
 import { useMediaQuery } from "usehooks-ts";
+import { useQuery } from "convex/react";
 
 import { cn } from "@/lib/utils";
+import { api } from "@/convex/_generated/api";
 import UserItem from "./userItem";
 
 const Navigation = () => {
@@ -18,6 +20,8 @@ const Navigation = () => {
 
 	const [isResetting, setIsResetting] = useState(false);
 	const [isCollapsed, setIsCollapsed] = useState(false);
+
+	const documents = useQuery(api.documents.get);
 
 	useEffect(() => {
 		if (isMobile) {
@@ -126,7 +130,9 @@ const Navigation = () => {
 				</div>
 
 				<div className='mt-4'>
-					<p>Documents</p>
+					{documents?.map((document) => (
+						<p key={document?._id}>{document?.title}</p>
+					))}
 				</div>
 				<div
 					onMouseDown={mouseDownHandler}
