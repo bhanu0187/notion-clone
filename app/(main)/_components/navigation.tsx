@@ -1,14 +1,24 @@
 "use client";
 
-import { ChevronsLeft, MenuIcon } from "lucide-react";
+import {
+	ChevronsLeft,
+	MenuIcon,
+	PlusCircle,
+	Search,
+	Settings,
+} from "lucide-react";
 import { usePathname } from "next/navigation";
 import { ElementRef, useEffect, useRef, useState } from "react";
 import { useMediaQuery } from "usehooks-ts";
-import { useQuery } from "convex/react";
+import { useMutation } from "convex/react";
+import { toast } from "sonner";
 
 import { cn } from "@/lib/utils";
 import { api } from "@/convex/_generated/api";
+
 import UserItem from "./userItem";
+import Item from "./item";
+import DocumentList from "./documentList";
 
 const Navigation = () => {
 	const pathName = usePathname();
@@ -21,7 +31,7 @@ const Navigation = () => {
 	const [isResetting, setIsResetting] = useState(false);
 	const [isCollapsed, setIsCollapsed] = useState(false);
 
-	const documents = useQuery(api.documents.get);
+	const create = useMutation(api.documents.create);
 
 	useEffect(() => {
 		if (isMobile) {
@@ -105,6 +115,16 @@ const Navigation = () => {
 		}
 	};
 
+	const createHandler = () => {
+		const promise = create({ title: "Untitled" });
+
+		toast.promise(promise, {
+			loading: "Creating a new document...",
+			success: "Document created successfully",
+			error: "Document creation failed",
+		});
+	};
+
 	return (
 		<>
 			<aside
@@ -125,14 +145,28 @@ const Navigation = () => {
 				>
 					<ChevronsLeft className='h-6 w-6' />
 				</div>
-				<div>
+				<div className='my-2'>
 					<UserItem />
+					<Item
+						label='Search'
+						icon={Search}
+						isSearch
+						onClick={() => {}}
+					/>
+					<Item
+						label='Settings'
+						icon={Settings}
+						onClick={() => {}}
+					/>
+					<Item
+						onClick={createHandler}
+						label='New Page'
+						icon={PlusCircle}
+					/>
 				</div>
 
 				<div className='mt-4'>
-					{documents?.map((document) => (
-						<p key={document?._id}>{document?.title}</p>
-					))}
+					<DocumentList />
 				</div>
 				<div
 					onMouseDown={mouseDownHandler}
