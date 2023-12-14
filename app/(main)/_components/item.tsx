@@ -1,6 +1,13 @@
 "use client";
 
-import { LucideIcon, ChevronDown, ChevronRight, Plus } from "lucide-react";
+import {
+	LucideIcon,
+	ChevronDown,
+	ChevronRight,
+	Plus,
+	MoreHorizontal,
+	Trash,
+} from "lucide-react";
 import { useMutation } from "convex/react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -9,6 +16,14 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Id } from "@/convex/_generated/dataModel";
 import { cn } from "@/lib/utils";
 import { api } from "@/convex/_generated/api";
+import {
+	DropdownMenu,
+	DropdownMenuSeparator,
+	DropdownMenuTrigger,
+	DropdownMenuContent,
+	DropdownMenuItem,
+} from "@/components/ui/dropdown-menu";
+import { useUser } from "@clerk/clerk-react";
 
 interface ItemProps {
 	id?: Id<"documents">;
@@ -38,7 +53,9 @@ const Item = ({
 	const ChevronIcon = expanded ? ChevronDown : ChevronRight;
 
 	const create = useMutation(api.documents.create);
+	const archive = useMutation(api.documents.archive);
 	const router = useRouter();
+	const { user } = useUser();
 
 	const expandHandler = (
 		event: React.MouseEvent<HTMLDivElement, MouseEvent>
@@ -63,6 +80,19 @@ const Item = ({
 			loading: "Creating new document...",
 			success: "New Document created",
 			error: "Failed to create a new document",
+		});
+	};
+
+	const onArchive = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+		event.stopPropagation();
+		if (!id) return;
+
+		const promise = archive({ id });
+
+		toast.promise(promise, {
+			loading: "Moving the document to trash",
+			success: "Document was successfully moved to trash",
+			error: "Failed to archive document",
 		});
 	};
 
@@ -98,6 +128,37 @@ const Item = ({
 			)}
 			{!!id && (
 				<div className='ml-auto flex items-center gap-x-2'>
+					<DropdownMenu>
+						<DropdownMenuTrigger
+							asChild
+							onClick={(e) => e.stopPropagation()}
+						>
+							<div
+								role='button'
+								className='opacity-0 group-hover:opacity-100 h-full ml-auto rounded-sm hover:bg-neutral-300 dark:hover:bg-neutral-600'
+							>
+								<MoreHorizontal />
+							</div>
+						</DropdownMenuTrigger>
+						<DropdownMenuContent
+							className='w-60'
+							align='start'
+							side='right'
+							forceMount
+						>
+							<DropdownMenuItem
+								className='cursor-pointer'
+								onClick={onArchive}
+							>
+								<Trash className='h-4 w-4 mr-2' />
+								Delete
+							</DropdownMenuItem>
+							<DropdownMenuSeparator />
+							<div className='text-xs text-muted-foreground p-2'>
+								Last edited by: {user?.fullName}
+							</div>
+						</DropdownMenuContent>
+					</DropdownMenu>
 					<div
 						className='opacity-0 group-hover:opacity-100 h-full ml-auto rounded-sm hover:bg-neutral-300 dark:hover:bg-neutral-600'
 						role='button'
