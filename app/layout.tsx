@@ -4,6 +4,7 @@ import { Toaster } from "sonner";
 
 import { ThemeProvider } from "@/components/providers/themeProvider";
 import { ConvexClientProvider } from "@/components/providers/convex-provider";
+import { ModalProvider } from "@/components/providers/modal-provider";
 
 import "./globals.css";
 
@@ -49,6 +50,7 @@ export default function RootLayout({
 						storageKey='notion-theme'
 					>
 						<Toaster position='top-right' />
+						<ModalProvider />
 						{children}
 					</ThemeProvider>
 				</ConvexClientProvider>
