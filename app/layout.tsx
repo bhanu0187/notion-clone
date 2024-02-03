@@ -5,6 +5,7 @@ import { Toaster } from "sonner";
 import { ThemeProvider } from "@/components/providers/themeProvider";
 import { ConvexClientProvider } from "@/components/providers/convex-provider";
 import { ModalProvider } from "@/components/providers/modal-provider";
+import { EdgeStoreProvider } from "@/lib/edgestore";
 
 import "./globals.css";
 
@@ -42,17 +43,19 @@ export default function RootLayout({
 		>
 			<body className={inter.className}>
 				<ConvexClientProvider>
-					<ThemeProvider
-						attribute='class'
-						defaultTheme='system'
-						enableSystem
-						disableTransitionOnChange
-						storageKey='notion-theme'
-					>
-						<Toaster position='top-right' />
-						<ModalProvider />
-						{children}
-					</ThemeProvider>
+					<EdgeStoreProvider>
+						<ThemeProvider
+							attribute='class'
+							defaultTheme='system'
+							enableSystem
+							disableTransitionOnChange
+							storageKey='notion-theme'
+						>
+							<Toaster position='top-right' />
+							<ModalProvider />
+							{children}
+						</ThemeProvider>
+					</EdgeStoreProvider>
 				</ConvexClientProvider>
 			</body>
 		</html>
