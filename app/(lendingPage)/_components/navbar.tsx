@@ -35,7 +35,7 @@ const Navbar = () => {
 							</Button>
 						</SignInButton>
 						<SignInButton mode='modal'>
-							<Button size='sm'>Get Notion Free</Button>
+							<Button size='sm'>Get JotSpace Free</Button>
 						</SignInButton>
 					</>
 				)}
@@ -46,7 +46,7 @@ const Navbar = () => {
 							size='sm'
 							asChild
 						>
-							<Link href='/documents'>Enter Notion</Link>
+							<Link href='/documents'>Enter JotSpace</Link>
 						</Button>
 						<UserButton afterSignOutUrl='/' />
 					</>

@@ -14,11 +14,10 @@ const Heading = () => {
 		<div className='max-w-3xl space-y-4'>
 			<h1 className='text-3xl sm:text-5xl md:text-6xl font-bold'>
 				Your ideas, Documents, & Plans. Unified. Welcome to{" "}
-				<span className='underline'>Notion-clone</span>
+				<span className='underline'>JotSpace</span>
 			</h1>
 			<h3 className='text-base sm:text-xl md:text-2xl font-medium'>
-				Notion-clone is the connected workspace where better, faster work
-				happens.
+				JotSpace is the connected workspace where better, faster work happens.
 			</h3>
 			{isLoading && (
 				<div className='w-full flex items-center justify-center'>
@@ -28,7 +27,7 @@ const Heading = () => {
 			{isAuthenticated && !isLoading && (
 				<Button asChild>
 					<Link href='/documents'>
-						Enter Notion-clone
+						Enter JotSpace
 						<ArrowRight className='h-4 w-4 ml2' />
 					</Link>
 				</Button>
@@ -36,7 +35,7 @@ const Heading = () => {
 			{!isAuthenticated && !isLoading && (
 				<SignInButton mode='modal'>
 					<Button>
-						Get Notion Free
+						Get JotSpace Free
 						<ArrowRight className='h-4 w-4 ml2' />
 					</Button>
 				</SignInButton>

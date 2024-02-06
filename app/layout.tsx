@@ -12,9 +12,9 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-	title: "Notion-clone",
+	title: "JotSpace",
 	description:
-		"Notion is a single space where you can think, write, and plan. Capture thoughts, manage projects, or even run an entire company — and do it exactly the way you want.",
+		"JotSpace is a single space where you can think, write, and plan. Capture thoughts, manage projects, or even run an entire company — and do it exactly the way you want.",
 	icons: {
 		icon: [
 			{
@@ -49,7 +49,7 @@ export default function RootLayout({
 							defaultTheme='system'
 							enableSystem
 							disableTransitionOnChange
-							storageKey='notion-theme'
+							storageKey='jotSpace-theme'
 						>
 							<Toaster position='top-right' />
 							<ModalProvider />

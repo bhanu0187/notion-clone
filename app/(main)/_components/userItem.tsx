@@ -8,13 +8,14 @@ import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
-	DropdownMenuLabel,
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useRouter } from "next/navigation";
 
 const UserItem = () => {
 	const { user } = useUser();
+	const router = useRouter();
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger>
@@ -26,7 +27,7 @@ const UserItem = () => {
 						<Avatar className='h-5 w-5'>
 							<AvatarImage src={user?.imageUrl} />
 						</Avatar>
-						<span className='text-start font-medium line-clamp-1'>{`${user?.fullName}'s Notion`}</span>
+						<span className='text-start font-medium line-clamp-1'>{`${user?.fullName}'s JotSpace`}</span>
 					</div>
 					<ChevronsLeftRight className='rotate-90 ml-2 text-muted-foreground h-4 w-4' />
 				</div>
@@ -49,7 +50,7 @@ const UserItem = () => {
 						</div>
 						<div className='space-y-1'>
 							<p className='text-sm line-clamp-1'>
-								{`${user?.fullName}'s Notion`}
+								{`${user?.fullName}'s JotSpace`}
 							</p>
 						</div>
 					</div>
@@ -59,7 +60,9 @@ const UserItem = () => {
 					asChild
 					className='w-full cursor-pointer text-muted-foreground'
 				>
-					<SignOutButton>Log Out</SignOutButton>
+					<SignOutButton>
+						<button onClick={() => router.push("/")}>LogOut</button>
+					</SignOutButton>
 				</DropdownMenuItem>
 			</DropdownMenuContent>
 		</DropdownMenu>

@@ -25,7 +25,7 @@ const Logo = () => {
 				alt='Logo'
 				className='hidden dark:block'
 			/>
-			<p className={cn("font-semibold", poppins.className)}>Notion</p>
+			<p className={cn("font-semibold", poppins.className)}>JotSpace</p>
 		</div>
 	);
 };
