@@ -35,6 +35,7 @@ const Menu = ({ documentId }: ClientProps) => {
 			loading: "Moving the document to the trash...",
 			success: "Document was successfully moved to the trash",
 			error: "Failed to move the document to the trash",
+			duration: 1000,
 		});
 
 		router.push("/documents");
