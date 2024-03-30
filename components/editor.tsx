@@ -30,7 +30,9 @@ const Editor = ({ onChange, initialContent, editable }: EditorProps) => {
 			? // @ts-ignore-next-line
 			  (JSON.parse(initialContent) as PartialBlock[])
 			: undefined,
+		// @ts-ignore
 		onEditorContentChange: (editor) => {
+			// @ts-ignore
 			onChange(JSON.stringify(editor.topLevelBlocks, null, 2));
 		},
 		uploadFile: uploadHandler,
